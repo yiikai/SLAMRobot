@@ -10,6 +10,33 @@ void forward(double speed, double angular,ros::Publisher& pub)
 	pub.publish(msg);
 }
 
+void stop(ros::Publisher& pub)
+{
+	geometry_msgs::Twist msg;
+	pub.publish(msg);
+}
+
+void backward(double speed, double angular,ros::Publisher& pub)
+{
+  geometry_msgs::Twist msg;
+	msg.linear.x = speed;
+	msg.angular.z = angular;
+	pub.publish(msg);
+}
+
+void turnleft(ros::Publisher& pub)
+{
+	geometry_msgs::Twist msg;
+	msg.angular.z = -1;
+	pub.publish(msg);
+}
+
+void turnright(ros::Publisher& pub)
+{
+	geometry_msgs::Twist msg;
+	msg.angular.z = 1;
+	pub.publish(msg);
+}
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
@@ -69,6 +96,22 @@ int main(int argc, char **argv)
 			case 'i':
 				{
 					forward(1.0,0.0,vel_pub);	
+				}break;
+			case 'k':
+				{
+					stop(vel_pub);	
+				}break;
+			case ',':
+				{
+					backward(-1.0,0.0,vel_pub);
+				}break;
+			case 'j':
+				{
+					turnleft(vel_pub);
+				}break;
+			case 'l':
+				{
+					turnright(vel_pub);
 				}break;
 			default:
 				{
