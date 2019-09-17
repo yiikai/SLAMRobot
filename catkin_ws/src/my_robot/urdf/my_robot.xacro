@@ -1,10 +1,10 @@
 <?xml version='1.0'?>
 <robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <link name="robot_footprint"></link>
+  <link name="base_link"></link>
   <xacro:include filename="$(find my_robot)/urdf/my_robot.gazebo" />  
   <joint name="robot_footprint_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="robot_footprint"/>
+    <parent link="base_link"/>
     <child link="chassis" />
   </joint>
   <gazebo reference="left_wheel">
